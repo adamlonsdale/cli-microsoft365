@@ -236,7 +236,7 @@ describe(commands.CHANNEL_MEMBER_REMOVE, () => {
         force: true,
         verbose: true
       }
-    } as any), new CommandError('The specified channel is not a private channel'));
+    } as any), new CommandError('The specified channel is not a private or shared channel'));
   });
 
   it('correctly get channel id by channel name', async () => {
