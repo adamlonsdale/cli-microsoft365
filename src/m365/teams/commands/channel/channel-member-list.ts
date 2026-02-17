@@ -116,7 +116,16 @@ class TeamsChannelMemberListCommand extends GraphCommand {
       this.teamId = await this.getTeamId(args);
       const channelId: string = await this.getChannelId(args);
       const endpoint = `${this.resource}/v1.0/teams/${this.teamId}/channels/${channelId}/members`;
-      let memberships = await odata.getAllItems<ConversationMember>(endpoint);
+      const requestOptions: CliRequestOptions = {
+        url: endpoint,
+        headers: {
+          accept: 'application/json;odata.metadata=none',
+          prefer: 'include-unknown-enum-members'
+        },
+        responseType: 'json'
+      };
+
+      let memberships = await odata.getAllItems<ConversationMember>(requestOptions);
       if (args.options.role) {
         if (args.options.role === 'member') {
           // Members have no role value

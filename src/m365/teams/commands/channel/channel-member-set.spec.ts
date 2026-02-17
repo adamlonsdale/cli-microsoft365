@@ -453,7 +453,7 @@ describe(commands.CHANNEL_MEMBER_SET, () => {
         id: '00000',
         role: 'owner'
       }
-    } as any), new CommandError('The specified channel is not a private channel'));
+    } as any), new CommandError('The specified channel is not a private or shared channel'));
   });
 
   it('correctly get channel id by channel name', async () => {
