@@ -4,6 +4,7 @@ import { Logger } from '../../../../cli/Logger.js';
 import request, { CliRequestOptions } from '../../../../request.js';
 import { entraGroup } from '../../../../utils/entraGroup.js';
 import { formatting } from '../../../../utils/formatting.js';
+import { odata } from '../../../../utils/odata.js';
 import { validation } from '../../../../utils/validation.js';
 import GraphCommand from '../../../base/GraphCommand.js';
 import commands from '../../commands.js';
@@ -123,8 +124,7 @@ class TeamsChannelMemberListCommand extends GraphCommand {
         responseType: 'json'
       };
 
-      const response = await request.get<{ value: ConversationMember[] }>(requestOptions);
-      let memberships = response.value;
+      let memberships = await odata.getAllItems<ConversationMember>(requestOptions);
       if (args.options.role) {
         if (args.options.role === 'member') {
           // Members have no role value
