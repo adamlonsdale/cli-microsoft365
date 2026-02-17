@@ -115,8 +115,9 @@ class TeamsChannelMemberListCommand extends GraphCommand {
     try {
       this.teamId = await this.getTeamId(args);
       const channelId: string = await this.getChannelId(args);
+      const endpoint = `${this.resource}/v1.0/teams/${this.teamId}/channels/${channelId}/members`;
       const requestOptions: CliRequestOptions = {
-        url: `${this.resource}/v1.0/teams/${this.teamId}/channels/${channelId}/members`,
+        url: endpoint,
         headers: {
           accept: 'application/json;odata.metadata=none',
           prefer: 'include-unknown-enum-members'
